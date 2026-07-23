@@ -1,0 +1,74 @@
+.page {
+  min-height: 100vh;
+}
+
+.about {
+  width: min(720px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 5rem 0 6rem;
+}
+
+.about-kicker {
+  margin: 0 0 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+.about h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.about-copy {
+  margin: 1.1rem 0 0;
+  max-width: 38rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--mute);
+  font-weight: 500;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack li {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2rem;
+}
+
+.links a {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.15rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.links a:hover {
+  color: var(--signal);
+  border-color: var(--signal);
+}

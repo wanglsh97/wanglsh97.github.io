@@ -1,0 +1,47 @@
+:root {
+  --ink: #14201c;
+  --mute: #51665c;
+  --paper: #e8efe9;
+  --panel: #f4f8f5;
+  --line: #c2d2c8;
+  --signal: #0c7a5c;
+  --amber: #d97706;
+  --hazard: #c2410c;
+  --game-void: #0b1210;
+  --game-mist: #143028;
+  --game-teal: #2dd4bf;
+  --game-amber: #fbbf24;
+  --game-coral: #fb7185;
+  --display: "Syne", system-ui, sans-serif;
+  --mono: "Fragment Mono", ui-monospace, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--ink);
+  font-family: var(--display);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--signal) 35%, white);
+}
