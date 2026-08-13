@@ -1,18 +1,155 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23202b26'/><path d='M25 25L75 50L25 75L40 50Z' fill='%23f3f5f1'/></svg>" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="wangliangsheng - 前端与 AI Agent 工程师，以及日常学习记录。"
-    />
-    <meta name="theme-color" content="#f3f5f1" />
-    <title>wangliangsheng</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="wangliangsheng 的个人技术博客，以互动漫画探索关于我、我的文章与我的家乡。">
+<title>wangliangsheng｜个人技术博客</title>
+<style>
+:root {
+  --bg: #f5f4ed;
+  --surface: #faf9f5;
+  --surface-warm: #e8e6dc;
+  --fg: #141413;
+  --fg-2: #3d3d3a;
+  --muted: #5e5d59;
+  --meta: #87867f;
+  --border: #f0eee6;
+  --border-soft: #e8e6dc;
+  --accent: #c96442;
+  --accent-on: #faf9f5;
+  --accent-hover: color-mix(in oklab, var(--accent), black 8%);
+  --accent-active: color-mix(in oklab, var(--accent), black 14%);
+  --success: #17a34a;
+  --warn: #eab308;
+  --danger: #b53333;
+  --font-display: "Anthropic Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Anthropic Sans", "Arial", system-ui, -apple-system, sans-serif;
+  --font-mono: "Anthropic Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+  --text-xs: 10px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 25px;
+  --text-2xl: 32px;
+  --text-3xl: 52px;
+  --text-4xl: 64px;
+  --leading-body: 1.6;
+  --leading-tight: 1.1;
+  --tracking-display: 0em;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --section-y-desktop: 96px;
+  --section-y-tablet: 64px;
+  --section-y-phone: 48px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: rgba(0, 0, 0, 0.05) 0px 4px 24px;
+  --focus-ring: 0 0 0 3px rgba(56, 152, 236, 0.3);
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --container-max: 1200px;
+  --container-gutter-desktop: 24px;
+  --container-gutter-tablet: 16px;
+  --container-gutter-phone: 12px;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;color:var(--fg);background:var(--bg);font:400 var(--text-base)/var(--leading-body) var(--font-body);overflow-x:hidden}
+button,a{font:inherit;color:inherit}
+button{cursor:pointer}
+a{text-decoration:none}
+:focus-visible{outline:0;box-shadow:var(--focus-ring)}
+.skip{position:fixed;left:16px;top:-80px;z-index:100;padding:10px 14px;border-radius:var(--radius-sm);background:var(--fg);color:var(--surface)}
+.skip:focus{top:16px}
+.masthead{height:68px;display:flex;align-items:center;justify-content:space-between;width:min(calc(100% - 48px),var(--container-max));margin:auto}
+.brand{font:500 var(--text-lg)/1 var(--font-display)}
+.hint{color:var(--muted);font-size:var(--text-sm)}
+.comic-shell{width:min(calc(100% - 48px),var(--container-max));margin:6px auto 58px;perspective:1600px}
+.comic{min-height:calc(100dvh - 150px);display:grid;grid-template-columns:1fr 1fr;position:relative;filter:drop-shadow(0 28px 28px color-mix(in oklab,var(--fg) 18%,transparent))}
+.comic:before{content:"";position:absolute;z-index:8;top:20px;bottom:20px;left:50%;width:34px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,color-mix(in oklab,var(--fg) 22%,transparent),transparent);pointer-events:none}
+.page{position:relative;overflow:hidden;isolation:isolate;background:var(--surface);border:1px solid var(--border-soft)}
+.page-left{padding:clamp(34px,5vw,70px);border-radius:24px 4px 4px 24px;transform:rotateY(1.5deg);transform-origin:right center;display:flex;flex-direction:column;justify-content:space-between;background:var(--surface-warm);transition:transform 720ms cubic-bezier(.65,0,.25,1),box-shadow 720ms cubic-bezier(.65,0,.25,1)}
+.page-right{padding:clamp(34px,5vw,70px);border-radius:4px 24px 24px 4px;transform:rotateY(-1.5deg);transform-origin:left center;background:var(--surface);transition:transform 720ms cubic-bezier(.65,0,.25,1),box-shadow 720ms cubic-bezier(.65,0,.25,1)}
+.comic.is-closing .page-left{z-index:12;transform:rotateY(88deg);box-shadow:18px 8px 28px color-mix(in oklab,var(--fg) 20%,transparent)}
+.comic.is-closing .page-right{z-index:12;transform:rotateY(-88deg);box-shadow:-18px 8px 28px color-mix(in oklab,var(--fg) 20%,transparent)}
+.comic.is-closing{pointer-events:none}
+.page:after{content:"";position:absolute;inset:14px;border:1px solid var(--border);border-radius:inherit;pointer-events:none}
+.page-left:before,.page-right:before{content:"";position:absolute;bottom:0;width:76px;height:76px;background:var(--bg);box-shadow:var(--elev-ring);z-index:3}
+.page-left:before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}.page-right:before{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.issue{font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{width:100%;max-width:11ch;margin:24px 0 0;font:500 clamp(42px,5vw,64px)/1.24 var(--font-display);text-wrap:balance}
+.cover-quote{max-width:26ch;margin:28px 0 0;padding-left:18px;border-left:2px solid var(--accent);color:var(--fg-2);font:italic 400 var(--text-base)/1.75 var(--font-display)}
+.intro-copy{max-width:30ch;margin:0;color:var(--fg-2);font-size:var(--text-lg);line-height:1.7}
+.desk{height:110px;margin-top:32px;border-top:5px solid var(--fg);position:relative}
+.laptop{position:absolute;right:8%;bottom:4px;width:42%;height:72px;border:4px solid var(--fg);border-radius:8px 8px 2px 2px;background:var(--surface)}
+.laptop:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-12px;height:8px;border-radius:4px;background:var(--fg)}
+.mug{position:absolute;left:8%;bottom:5px;width:32px;height:40px;border:4px solid var(--fg);border-radius:4px 4px 10px 10px}
+.mug:after{content:"";position:absolute;right:-16px;top:8px;width:12px;height:16px;border:4px solid var(--fg);border-left:0;border-radius:0 10px 10px 0}
+.book-meta{display:flex;justify-content:space-between;margin-bottom:50px;color:var(--meta);font-size:var(--text-sm)}
+.folio{font-family:var(--font-display)}
+.desk{margin-bottom:26px}
+.toc-title{margin:0 0 18px;font:500 var(--text-2xl)/1.35 var(--font-display)}
+.toc-intro{max-width:38ch;margin:0 0 40px;color:var(--muted);font-size:var(--text-sm)}
+.toc{display:grid;gap:0;border-top:1px solid var(--border-soft)}
+.hotspot{width:100%;min-height:92px;padding:20px 0;border:0;border-bottom:1px solid var(--border-soft);border-radius:0;background:transparent;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:18px;text-align:left;transition:color var(--motion-fast),padding var(--motion-fast),background var(--motion-fast)}
+.hotspot:hover{padding-inline:14px;color:var(--accent);background:var(--bg)}
+.hotspot:active{transform:translateY(1px)}
+.chapter-no{font:500 var(--text-sm)/1 var(--font-display);color:var(--meta)}
+.chapter-name{font:500 var(--text-xl)/1.4 var(--font-display)}
+.chapter-note{font-size:var(--text-sm);color:var(--meta)}
+.bookmark{position:absolute;right:44px;top:0;width:34px;height:94px;background:var(--accent);clip-path:polygon(0 0,100% 0,100% 82%,50% 100%,0 82%)}
+.margin-note{position:absolute;right:34px;bottom:36px;color:var(--meta);font:400 var(--text-xs)/1.5 var(--font-body);writing-mode:vertical-rl;letter-spacing:.08em}
+.sheet{width:min(680px,calc(100% - 28px));max-height:min(82dvh,760px);padding:0;border:0;border-radius:var(--radius-lg);background:var(--surface);color:var(--fg);box-shadow:var(--elev-raised);overflow:auto}
+.sheet::backdrop{background:color-mix(in oklab,var(--fg) 66%,transparent);backdrop-filter:blur(4px)}
+.sheet-inner{padding:clamp(28px,5vw,56px)}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:32px}
+.sheet h2{margin:0;font:500 clamp(34px,5vw,52px)/1.34 var(--font-display)}
+.close{width:44px;height:44px;flex:none;border:1px solid var(--border-soft);border-radius:var(--radius-sm);background:var(--surface-warm);color:var(--fg)}
+.close:hover{background:var(--border-soft)}
+.sheet p{max-width:62ch;color:var(--muted);line-height:1.75}
+.article-list{display:grid;gap:0}
+.article-link{display:block;padding:22px 0;border-top:1px solid var(--border-soft)}
+.article-link h3{margin:0 0 7px;font:500 var(--text-xl)/1.45 var(--font-display)}
+.article-link span{color:var(--meta);font-size:var(--text-sm)}
+.article-link:hover h3{color:var(--accent)}
+.social{display:flex;gap:16px;margin-top:24px}.social a{text-decoration:underline;text-underline-offset:4px}.social a:hover{color:var(--accent)}
+.empty-note{padding:24px;border-radius:var(--radius-md);background:var(--surface-warm);color:var(--fg-2)}
+.footer{width:min(calc(100% - 48px),var(--container-max));margin:0 auto 30px;display:flex;justify-content:space-between;gap:24px;color:var(--meta);font-size:var(--text-sm)}
+@media(max-width:820px){
+  .masthead,.comic-shell,.footer{width:min(calc(100% - 24px),var(--container-max))}.hint{display:none}.comic{min-height:auto;grid-template-columns:1fr}.comic:before{display:none}.page{min-height:620px;transform:none}.page-left{border-radius:20px 20px 4px 4px}.page-right{border-radius:4px 4px 20px 20px}
+}
+@media(max-width:560px){
+  .masthead{height:60px}.comic-shell{margin-top:0}.page{min-height:570px;padding:30px 26px}.hotspot{grid-template-columns:34px 1fr}.chapter-note{display:none}.footer{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){.hotspot,.page-left,.page-right{transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#comic">跳到漫画菜单</a>
+<header class="masthead" data-od-id="site-header"><a class="brand" href="#comic">wangliangsheng</a><span class="hint">生活 · 家庭 · 家乡 · 工作 · 思考</span></header>
+<main>
+  <section class="comic-shell" id="comic" aria-labelledby="comic-title" data-od-id="open-book-homepage">
+    <div class="comic">
+      <article class="page page-left" data-od-id="book-left-page"><div><div class="book-meta"><span>个人技术博客</span><span class="folio">扉页</span></div><p class="issue">wangliangsheng</p><h1 id="comic-title" data-od-id="book-title">JOB IS NOT YOUR LIFE</h1><blockquote class="cover-quote">人生就是一本书，代码之外还有故事。</blockquote></div><div><p class="intro-copy">我的生活、家庭、家乡与工作，也包括一路上的见闻、选择和思考。</p><div class="desk" aria-hidden="true"><span class="mug"></span><span class="laptop"></span></div></div></article>
+      <article class="page page-right" data-od-id="book-right-page"><span class="bookmark" aria-hidden="true"></span><div class="book-meta"><span>目录</span><span class="folio">01</span></div><nav class="toc" aria-label="书本目录" data-od-id="book-menu"><a class="hotspot" href="/chapters/about.html"><span class="chapter-no">一</span><span class="chapter-name">关于我</span><span class="chapter-note">身份与关注</span></a><a class="hotspot" href="/chapters/articles.html"><span class="chapter-no">二</span><span class="chapter-name">我的文章</span><span class="chapter-note">实践与笔记</span></a><a class="hotspot" href="/chapters/family.html"><span class="chapter-no">三</span><span class="chapter-name">我的家庭</span><span class="chapter-note">陪伴与日常</span></a><a class="hotspot" href="/chapters/hometown.html"><span class="chapter-no">四</span><span class="chapter-name">我的家乡</span><span class="chapter-note">来处与记忆</span></a></nav></article>
+    </div>
+  </section>
+</main>
+<footer class="footer" data-od-id="site-footer"><span>© 2026 wangliangsheng</span><span>文章以实践为主，内容会随认知更新。</span></footer>
+<script>
+const book=document.querySelector('.comic');const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;document.querySelectorAll('.hotspot').forEach(link=>link.addEventListener('click',event=>{if(reduce)return;event.preventDefault();book.classList.add('is-closing');setTimeout(()=>{location.href=link.href},720)}));
+</script>
+</body>
 </html>

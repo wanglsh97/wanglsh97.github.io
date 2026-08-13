@@ -1,50 +1,6 @@
-:root {
-  --text: #171717;
-  --muted: #5f6368;
-  --line: #e5e7eb;
-  --blue: #2563eb;
-  --code: #f3f4f6;
-  --mono: "SFMono-Regular", Consolas, monospace;
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-html,
-body,
-#root {
-  min-height: 100%;
-  margin: 0;
-}
-
-body {
-  min-width: 1024px;
-  background: #fff;
-}
-
-button,
-a {
-  font: inherit;
-}
-
-a:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 4px;
-}
-
-::selection {
-  background: #dbeafe;
-}
+* , *::before, *::after { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body { min-width: 320px; }
+button, a { font: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid #61d9ff; outline-offset: 4px; }
+::selection { background: rgba(97, 217, 255, .24); }
