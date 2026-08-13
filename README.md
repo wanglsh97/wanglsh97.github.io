@@ -31,6 +31,8 @@ npm run build
 
 GitHub Pages 直接使用 `main` 分支根目录：
 
+当前线上发布源：`main / (root)`。
+
 1. 提交网站文件并推送到 `main`。
 2. 在仓库 **Settings → Pages** 中选择 **Deploy from a branch**。
 3. Source 设置为 `main` 分支和 `/ (root)` 目录。
